@@ -1,0 +1,13 @@
+/*
+* jqLog - jQuery framework extensions
+*
+* Version: 0.0.1a
+* Copyright 2011 Alex Tkachev
+*
+* Dual licensed under MIT or GPLv2 licenses
+*   http://en.wikipedia.org/wiki/MIT_License
+*   http://en.wikipedia.org/wiki/GNU_General_Public_License
+*
+* Date: Fri Jul 8 11:57:03 2011 +0300
+*/
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('(8(a){a.9={g:{}}})(y),8(a){a.9.r={1b:1,P:2,1c:3,1d:4,1e:5,1f:6,E:8(b,c){o(a.17(c)==="1g")h b<c;h!1}}}(y),8(a){a.9.g.C=8(){7.n.B(7,z)},a.q(a.9.g.C.x,{n:8(b){a.q(7,b)},12:8(a,b,c){o(7.9.H(7,a)){o(c)I(i d 13 c)b=b.1h("{"+d+"}",c[d]);7.9.J(7,a,b)}}}),["T","M","U","14","V","W"].L(8(b){a.9.g.C.x[b]=8(){1i.x.1j.1k(z,a.9.r[b.X()]),7.12.B(7,z)}})}(y),8(a){a.9.g.R=8(){7.n.B(7,z)},a.q(a.9.g.R.x,{p:l,k:l,n:8(a){7.9=a,7.Q()},Q:8(){7.p={},7.k=7.p.m=u a.9.g.C({9:7.9,15:"",F:[],j:a.9.r.P})},v:8(a){a.G&&(7.k.j=a.G.j);I(i b 13 a)o(b!="G"){i c=a[b],d=7.t(b);c.j&&(d.j=c.j)}},t:8(b){o(!b||b.K===0)h 7.k;i c=b.1l("."),d=7.p;I(i e=0;e<c.K;e++){i f=c[e];d[f]||(d[f]={m:l}),d=d[f]}d.m===l&&(d.m=u a.9.g.C({9:7.9,15:b,F:c}));h d.m},H:8(b,c){o(a.9.r.E(c,7.k.j)||a.9.r.E(c,b.j))h!1;i d=7.p;I(i e=0;e<b.F.K;e++){i f=b.F[e];o(d[f].m&&d[f].m.j&&a.9.r.E(c,d[f].m.j))h!1;d=d[f]}h!0}})}(y),8(a){a.9.g.A=8(){7.n.B(7,z)};i b=a.9.r,c={};["T","M","U","14","V","W"].L(8(a){c[b[a.X()]]=a}),a.9.g.A.10=8(a){h c[a]||"M"},a.q(a.9.g.A.x,{D:D,n:8(b){a.q(7,b),7.Y=7.11()},J:8(b){o(!7.Y)h!1;i c=a.9.g.A.10(b.j);7.D[c](b.S);h!0},11:8(){h 19 7.D!=="1a"&&7.D!==l}})}(y),8(a){a.9.g.N=8(){7.n.B(7,z)},a.q(a.9.g.N.x,{w:l,s:l,k:l,O:l,n:8(a){7.O=a},Q:8(){7.w=u a.9.g.R(7),7.k=7.w.k,7.s=[],7.v(7.O)},H:8(a,b){h 7.w.H(a,b)},J:8(a,b,c){i d={1m:u 16,t:a,j:b,S:c};7.s.L(8(a){a.J(d)})},t:8(a){h 7.w.t(a)},v:8(a){a.p&&7.w.v(a.p),a.s&&(7.s=a.s)}}),a.q(a.9,{Z:{s:[u a.9.g.A],p:{G:{j:a.9.r.P}}}});i b=8(){i b=u a.9.g.N(a.9.Z);h{18:b,k:8(){h b.k},t:8(a){h b.t(a)},v:8(a){b.v(a)}}}();a.q(a.9,b)}(y)',62,85,'|||||||this|function|jqLog|||||||classes|return|var|level|rootLogger|null|_logger|initialize|if|loggers|extend|Level|appenders|logger|new|configure|manager|prototype|jQuery|arguments|ConsoleAppender|apply|Logger|console|isLower|nameArr|root|isLevelEnabled|for|doAppend|length|each|debug|JQLog|defaultConfig|DEBUG|reset|LoggersManager|message|trace|info|error|fatal|toUpperCase|enabled|defaults|loggingMethodForLevel|hasConsole|log|in|warn|name|Date|type|_instance|typeof|undefined|TRACE|INFO|WARN|ERROR|FATAL|number|replace|Array|unshift|call|split|date'.split('|'),0,{}))

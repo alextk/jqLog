@@ -1,0 +1,8 @@
+(function($) {
+
+  $.jqLog = {
+    classes: {}
+  };
+
+
+})(jQuery);
