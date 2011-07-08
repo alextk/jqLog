@@ -8,7 +8,7 @@
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: Fri Jul 8 11:57:03 2011 +0300
+* Date: Fri Jul 8 22:58:35 2011 +0300
 */
 
 (function($) {
@@ -113,13 +113,13 @@
       }
       var nameArr = name.split('.');
       var tree = this.loggers;
-      for (var i = 0; i < nameArr.length; i++) {
-        var key = nameArr[i];
+      nameArr.each(function(key){
         if (!tree[key]) {
           tree[key] = {_logger: null};
         }
         tree = tree[key];
-      }
+      });
+      
       if (tree._logger === null) {
         tree._logger = new $.jqLog.classes.Logger({jqLog: this.jqLog, name: name, nameArr: nameArr});
       }

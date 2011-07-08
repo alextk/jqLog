@@ -41,13 +41,13 @@
       }
       var nameArr = name.split('.');
       var tree = this.loggers;
-      for (var i = 0; i < nameArr.length; i++) {
-        var key = nameArr[i];
+      nameArr.each(function(key){
         if (!tree[key]) {
           tree[key] = {_logger: null};
         }
         tree = tree[key];
-      }
+      });
+      
       if (tree._logger === null) {
         tree._logger = new $.jqLog.classes.Logger({jqLog: this.jqLog, name: name, nameArr: nameArr});
       }
