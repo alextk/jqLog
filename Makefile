@@ -9,6 +9,7 @@ JS_FILES = license.txt\
 	${SRC_DIR}/level.js\
 	${SRC_DIR}/logger.js\
 	${SRC_DIR}/loggers-manager.js\
+	${SRC_DIR}/arrau-console.js\
 	${SRC_DIR}/console-appender.js\
 	${SRC_DIR}/jqlog.js
 

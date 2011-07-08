@@ -6,17 +6,17 @@ test("Basic requirements", function() {
   ok($.jqLog.configure, "$.jqLog.configure not present");
 });
 
-module("jqlog", {
-  setup: function() {
-    $.jqLog._instance.reset();
-  }
-});
-
 test("rootLogger()", function() {
   var rootLogger = $.jqLog.logger();
   equal(rootLogger.nameArr.length, 0);
   ok(rootLogger == $.jqLog.rootLogger());
   equal(rootLogger.level, $.jqLog.defaults.loggers.root.level);
+});
+
+module("jqlog", {
+  setup: function() {
+    $.jqLog._instance.reset();
+  }
 });
 
 test("logger()", function() {

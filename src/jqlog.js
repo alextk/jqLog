@@ -14,6 +14,7 @@
 
     initialize: function(config) {
       this.defaultConfig = config;
+      this.reset();
     },
 
     reset: function() {

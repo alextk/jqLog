@@ -8,7 +8,7 @@
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: Fri Jul 8 22:58:35 2011 +0300
+* Date: Fri Jul 8 23:04:00 2011 +0300
 */
 
 (function($) {
@@ -203,6 +203,7 @@
 
     initialize: function(config) {
       this.defaultConfig = config;
+      this.reset();
     },
 
     reset: function() {
