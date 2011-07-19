@@ -1,14 +1,14 @@
 /*
 * jqLog - jQuery framework extensions
 *
-* Version: 0.0.1a
+* Version: 0.0.1b
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: Fri Jul 8 23:19:35 2011 +0300
+* Date: Tue Jul 19 17:30:06 2011 +0300
 */
 
 (function($) {
@@ -221,10 +221,11 @@
     doAppend: function(event){
       if(!this.console.enabled) return false;
 
-      var loggingMethod = $.jqLog.classes.ConsoleAppender.loggingMethodForLevel(console, event.level);
-      loggingMethod(event.message); //perform actual log
+      var loggingMethod = $.jqLog.classes.ConsoleAppender.loggingMethodForLevel(event.level);
+      this.console[loggingMethod](event.message); //perform actual log
       return true;
     }
+
   });
 
 })(jQuery);
