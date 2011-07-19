@@ -5,6 +5,9 @@
   };
 
   $.extend($.jqLog.classes.ArrayConsole.prototype, {
+    
+    enabled: true,
+
     initialize: function() {
       this.buffer = [];
     },
@@ -17,7 +20,7 @@
   ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].each(function(name) {
     $.jqLog.classes.ArrayConsole.prototype[name] = function(message) {
       this.buffer.push({method: name, message: message});
-    }
+    };
   });
 
 })(jQuery);

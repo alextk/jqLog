@@ -16,8 +16,10 @@ test("loggingMethodForLevel()", function() {
 });
 
 test("enabled", function(){
-  var appender = new $.jqLog.classes.ConsoleAppender({console: null});
-  equals(appender.enabled, false);
+  var appender = new $.jqLog.classes.ConsoleAppender();
+  ok(appender.console instanceof $.jqLog.classes.BrowserConsole);
+  equals(appender.doAppend({level: $.jqLog.Level.DEBUG, message: 'debug message'}), true);
+  appender.console.enabled = false;
   equals(appender.doAppend({level: $.jqLog.Level.DEBUG, message: 'debug message'}), false);
 });
 
@@ -26,7 +28,8 @@ test("doAppend()", function() {
   
   var Level = $.jqLog.Level;
   var appender = new $.jqLog.classes.ConsoleAppender({console: console});
-  equals(appender.enabled, true);
+  ok(appender.console instanceof $.jqLog.classes.ArrayConsole);
+  equals(appender.console.enabled, true);
 
   ok(appender.doAppend({level: Level.DEBUG, message: 'debug message1'}));
   equals(console.buffer.last().method, 'debug');

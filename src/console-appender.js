@@ -8,31 +8,24 @@
   var map = {};
   ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].each(function(name){ map[Level[name.toUpperCase()]] = name; });
   $.jqLog.classes.ConsoleAppender.loggingMethodForLevel = function(level){
-    return map[level] || 'debug';
+    return map[level];
   };
 
   $.extend($.jqLog.classes.ConsoleAppender.prototype, {
 
-    console: console,
+    console: null,
 
     initialize: function(config) {
       $.extend(this, config);
-      this.enabled = this.hasConsole();
+      if(!this.console) this.console = new $.jqLog.classes.BrowserConsole();
     },
 
     doAppend: function(event){
-      if(!this.enabled){
-        return false;
-      }
-      
-      var loggingMethod = $.jqLog.classes.ConsoleAppender.loggingMethodForLevel(event.level);
-      //perform actual log
-      this.console[loggingMethod](event.message);
-      return true;
-    },
+      if(!this.console.enabled) return false;
 
-    hasConsole: function() {
-      return typeof(this.console) !== 'undefined' && this.console !== null;
+      var loggingMethod = $.jqLog.classes.ConsoleAppender.loggingMethodForLevel(event.level);
+      this.console[loggingMethod](event.message); //perform actual log
+      return true;
     }
 
   });

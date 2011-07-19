@@ -8,7 +8,7 @@
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: Fri Jul 8 23:04:00 2011 +0300
+* Date: Fri Jul 8 23:19:35 2011 +0300
 */
 
 (function($) {
@@ -149,6 +149,55 @@
 
 })(jQuery);(function($) {
 
+  $.jqLog.classes.ArrayConsole = function() {
+    this.initialize.apply(this, arguments);
+  };
+
+  $.extend($.jqLog.classes.ArrayConsole.prototype, {
+    
+    enabled: true,
+
+    initialize: function() {
+      this.buffer = [];
+    },
+
+    log: function(method, message) {
+      this[method](message);
+    }
+  });
+
+  ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].each(function(name) {
+    $.jqLog.classes.ArrayConsole.prototype[name] = function(message) {
+      this.buffer.push({method: name, message: message});
+    };
+  });
+
+})(jQuery);(function($) {
+
+  $.jqLog.classes.BrowserConsole = function() {
+    this.initialize.apply(this, arguments);
+  };
+
+  $.extend($.jqLog.classes.BrowserConsole.prototype, {
+    initialize: function() {
+      this.console = console;
+      this.enabled = typeof(this.console) !== 'undefined' && this.console !== null;
+    },
+
+    log: function(method, message) {
+      this[method](message);
+    }
+  });
+
+  ['trace', 'debug', 'info', 'warn', 'error'].each(function(name) {
+    $.jqLog.classes.BrowserConsole.prototype[name] = function(message) {
+      this.console[name](message);
+    };
+  });
+  $.jqLog.classes.BrowserConsole.prototype.fatal = $.jqLog.classes.BrowserConsole.prototype.error; //browser console doesn't have fatal level
+
+})(jQuery);(function($) {
+
   $.jqLog.classes.ConsoleAppender = function() {
     this.initialize.apply(this, arguments);
   };
@@ -157,33 +206,25 @@
   var map = {};
   ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].each(function(name){ map[Level[name.toUpperCase()]] = name; });
   $.jqLog.classes.ConsoleAppender.loggingMethodForLevel = function(level){
-    return map[level] || 'debug';
+    return map[level];
   };
 
   $.extend($.jqLog.classes.ConsoleAppender.prototype, {
 
-    console: console,
+    console: null,
 
     initialize: function(config) {
       $.extend(this, config);
-      this.enabled = this.hasConsole();
+      if(!this.console) this.console = new $.jqLog.classes.BrowserConsole();
     },
 
     doAppend: function(event){
-      if(!this.enabled){
-        return false;
-      }
-      
-      var loggingMethod = $.jqLog.classes.ConsoleAppender.loggingMethodForLevel(event.level);
-      //perform actual log
-      this.console[loggingMethod](event.message);
+      if(!this.console.enabled) return false;
+
+      var loggingMethod = $.jqLog.classes.ConsoleAppender.loggingMethodForLevel(console, event.level);
+      loggingMethod(event.message); //perform actual log
       return true;
-    },
-
-    hasConsole: function() {
-      return typeof(this.console) !== 'undefined' && this.console !== null;
     }
-
   });
 
 })(jQuery);

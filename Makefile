@@ -9,13 +9,14 @@ JS_FILES = license.txt\
 	${SRC_DIR}/level.js\
 	${SRC_DIR}/logger.js\
 	${SRC_DIR}/loggers-manager.js\
-	${SRC_DIR}/arrau-console.js\
+	${SRC_DIR}/array-console.js\
+	${SRC_DIR}/browser-console.js\
 	${SRC_DIR}/console-appender.js\
 	${SRC_DIR}/jqlog.js
 
-JQEXT = ${DIST_DIR}/jquery.jqlog.js
-JQEXT_MIN = ${DIST_DIR}/jquery.jqlog.min.js
-JQEXT_PACK = ${DIST_DIR}/jquery.jqlog.pack.js
+JS = ${DIST_DIR}/jquery.jqlog.js
+JS_MIN = ${DIST_DIR}/jquery.jqlog.min.js
+JS_PACK = ${DIST_DIR}/jquery.jqlog.pack.js
 
 JS_ENGINE ?= `which node nodejs`
 COMPILER = ${JS_ENGINE} ${BUILD_DIR}/uglify.js --unsafe
@@ -29,7 +30,7 @@ JGROUSE_DOC = /c/devl/js/tools/jGrouseDoc-2.1
 VERSION = `cat version.txt`
 DATE = `git log --pretty=format:'%ad' -1`
 
-all: clean jqlog lint min pack doc
+all: clean js hint min pack doc
 	@@echo "done"
 
 doc: 
@@ -41,39 +42,39 @@ build/create_dist:
 	@@mkdir -p ${DIST_DIR}
 
 #join all files into one, add version and licence to the head of the file	
-jqlog: build/create_dist
-	@@echo "Building" ${JQEXT}
+js: build/create_dist
+	@@echo "Building" ${JS}
 #	join all files into one | replace @Date variable with date command eval | replace @VERSION variable with version number
-	@@cat ${JS_FILES} | sed 's/@DATE/'"${DATE}"'/' | sed s/@VERSION/${VERSION}/ > ${JQEXT}
+	@@cat ${JS_FILES} | sed 's/@DATE/'"${DATE}"'/' | sed s/@VERSION/${VERSION}/ > ${JS}
 	
-#run JSLint checks on the joined file (using node.js)
-lint: jqlog
+#run JSHint checks on the joined file (using node.js)
+hint: js
 	@@if test ! -z ${JS_ENGINE}; then \
-		echo "Checking jQuery against JSLint..."; \
-		${JS_ENGINE} $(BUILD_DIR)/jslint-check.js ${JQEXT} ; \
+		echo "Checking jQuery against JSHint..."; \
+		${JS_ENGINE} $(BUILD_DIR)/jshint-check.js ${JS} ; \
 	else \
-		echo "You must have NodeJS installed in order to test JQEXT against JSLint."; \
+		echo "You must have NodeJS installed in order to test JS against JSHint."; \
 	fi
 	
 #run node.js with uglify script that compresses the js, remove all comments. add copyright notice to the head of the file (head -12)
-min: jqlog
+min: js
 	@@if test ! -z ${JS_ENGINE}; then \
-		echo "Building" ${JQEXT_MIN}; \
-		head -12 ${JQEXT} > ${JQEXT_MIN}; \
-		${COMPILER} ${JQEXT} > ${JQEXT_MIN}.tmp; \
-		sed '$ s#^\( \*/\)\(.\+\)#\1\n\2;#' ${JQEXT_MIN}.tmp >> ${JQEXT_MIN}; \
-		rm -rf $(JQEXT_MIN).tmp; \
+		echo "Building" ${JS_MIN}; \
+		head -12 ${JS} > ${JS_MIN}; \
+		${COMPILER} ${JS} > ${JS_MIN}.tmp; \
+		sed '$ s#^\( \*/\)\(.\+\)#\1\n\2;#' ${JS_MIN}.tmp >> ${JS_MIN}; \
+		rm -rf $(JS_MIN).tmp; \
 	else \
 		echo "You must have NodeJS installed in order to minify JS."; \
 	fi
 
 #run rhino server and pack minified js file into even smaller size. add copyright notice at the start (head -12)
 pack: min
-	@@echo "Building" ${JQEXT_PACK}
+	@@echo "Building" ${JS_PACK}
 
-	@@head -12 ${JQEXT} > ${JQEXT_PACK}
-	@@${PACKER} ${JQEXT_MIN} ${JQEXT_PACK}.tmp
-	@@cat ${JQEXT_PACK}.tmp >> ${JQEXT_PACK} && rm ${JQEXT_PACK}.tmp
+	@@head -12 ${JS} > ${JS_PACK}
+	@@${PACKER} ${JS_MIN} ${JS_PACK}.tmp
+	@@cat ${JS_PACK}.tmp >> ${JS_PACK} && rm ${JS_PACK}.tmp
 
 clean:
 	@@echo "Removing distribution directory:" ${DIST_DIR}
