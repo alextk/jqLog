@@ -114,6 +114,10 @@
     <exec executable="git" dir="${basedir}" failonerror="true">
       <arg line="commit -m 'commiting files for release of version ${project.version}'" />
     </exec>
+    <echo message="Pushing version release to master..."/>
+    <exec executable="git" dir="${basedir}" inputstring="${passphrase}">
+      <arg line="push" />
+    </exec>
     <echo message="Creating git tag for version ${project.version}..."/>
     <exec executable="git" dir="${basedir}" failonerror="true">
       <arg line="tag 'v${project.version}'" />
