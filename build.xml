@@ -1,6 +1,6 @@
 <project default="all" basedir=".">
   <!-- set global properties for this build -->
-  <property file="build/build.properties"/>
+  <property file="build/build.properties" prefix="project"/>
   <property name="srcDir" location="src"/>
   <property name="distDir" location="dist"/>
   <property name="distFilePath" location="${distDir}/${project.fileName}"/>
@@ -103,6 +103,13 @@
       <property name="inputDir" value="${srcDir}"/>
       <property name="outputDir" value="${distDir}/docs"/>
     </ant>
+  </target>
+
+  <target name="version">
+    <input message="Please provide new version for this project (current version is ${project.version}:" addproperty="project.newVersion"/>
+    <propertyfile file="${buildDir}/build.properties">
+      <entry  key="version" value="project.newVersion"/>
+    </propertyfile>
   </target>
 
   <target name="release" depends="pack" description="This command creates new git tag with project version, and pushes the tag to git">
