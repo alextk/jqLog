@@ -108,7 +108,7 @@
   <target name="version">
     <input message="Please provide new version for this project (current version is ${project.version}:" addproperty="project.newVersion"/>
     <propertyfile file="${buildDir}/build.properties">
-      <entry  key="version" value="project.newVersion"/>
+      <entry key="version" value="${project.newVersion}"/>
     </propertyfile>
   </target>
 
