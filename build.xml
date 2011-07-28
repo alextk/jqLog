@@ -1,6 +1,6 @@
 <project default="all" basedir=".">
   <!-- set global properties for this build -->
-  <property file="build/build.properties" prefix="project"/>
+  <property prefix="project" file="build/build.properties"/>
   <property name="srcDir" location="src"/>
   <property name="distDir" location="dist"/>
   <property name="distFilePath" location="${distDir}/${project.fileName}"/>
