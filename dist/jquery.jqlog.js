@@ -1,14 +1,15 @@
 /*
-* jqLog - jQuery framework extensions
+* jqLog - jQuery logging for javascript
 *
-* Version: 0.0.1b
+* Version: 0.0.1
+* Build: 35
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: Tue Jul 19 17:30:06 2011 +0300
+* Date: 28/07/2011 16:03:07
 */
 
 (function($) {
