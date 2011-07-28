@@ -106,6 +106,14 @@
   </target>
 
   <target name="release" depends="pack" description="This command creates new git tag with project version, and pushes the tag to git">
+    <echo message="Adding files for committ..."/>
+    <exec executable="git" dir="${basedir}" failonerror="true">
+      <arg line="add -A" />
+    </exec>
+    <echo message="Committing files before release..."/>
+    <exec executable="git" dir="${basedir}" failonerror="true">
+      <arg line="commit -m 'commiting files for release of version ${project.version}'" />
+    </exec>
     <echo message="Creating git tag for version ${project.version}..."/>
     <exec executable="git" dir="${basedir}" failonerror="true">
       <arg line="tag 'v${project.version}'" />
