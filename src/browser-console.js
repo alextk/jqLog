@@ -6,7 +6,7 @@
 
   $.extend($.jqLog.classes.BrowserConsole.prototype, {
     initialize: function() {
-      this.console = console;
+      this.console = window.console;
       this.enabled = typeof(this.console) !== 'undefined' && this.console !== null;
     },
 
