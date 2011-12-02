@@ -11,8 +11,6 @@ project = JsProjectBuilder.new(
 )
 JsProjectBuilder::Tasks.new(project)
 
-#project = YAML::load(File.open("build/project.yml"))
-#dist_file_name = "jquery.jqlog.js"
 
 desc 'Join all javascript files into one joined file with version and license at the head'
 task :js => :prepare do
