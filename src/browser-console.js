@@ -17,7 +17,11 @@
 
   ['trace', 'debug', 'info', 'warn', 'error'].each(function(name) {
     $.jqLog.classes.BrowserConsole.prototype[name] = function(message) {
-      this.console[name](message);
+      if(this.console[name]){
+        this.console[name](message);
+      } else {
+        this.console.log(name + ": " + message);
+      }
     };
   });
   $.jqLog.classes.BrowserConsole.prototype.fatal = $.jqLog.classes.BrowserConsole.prototype.error; //browser console doesn't have fatal level

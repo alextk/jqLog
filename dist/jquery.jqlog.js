@@ -2,14 +2,14 @@
 * jqLog - jQuery logging for javascript
 *
 * Version: 0.0.2
-* Build: 54
+* Build: 77
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: 28/07/2011 18:19:17
+* Date: 02 Dec 2011 22:11:21
 */
 
 (function($) {
@@ -19,7 +19,8 @@
   };
 
 
-})(jQuery);(function($) {
+})(jQuery);
+(function($) {
 
   $.jqLog.Level = {
     TRACE: 1,
@@ -148,7 +149,8 @@
 
   });
 
-})(jQuery);(function($) {
+})(jQuery);
+(function($) {
 
   $.jqLog.classes.ArrayConsole = function() {
     this.initialize.apply(this, arguments);
@@ -173,7 +175,8 @@
     };
   });
 
-})(jQuery);(function($) {
+})(jQuery);
+(function($) {
 
   $.jqLog.classes.BrowserConsole = function() {
     this.initialize.apply(this, arguments);
@@ -181,7 +184,7 @@
 
   $.extend($.jqLog.classes.BrowserConsole.prototype, {
     initialize: function() {
-      this.console = console;
+      this.console = window.console;
       this.enabled = typeof(this.console) !== 'undefined' && this.console !== null;
     },
 
@@ -192,12 +195,17 @@
 
   ['trace', 'debug', 'info', 'warn', 'error'].each(function(name) {
     $.jqLog.classes.BrowserConsole.prototype[name] = function(message) {
-      this.console[name](message);
+      if(this.console[name]){
+        this.console[name](message);
+      } else {
+        this.console.log(name + ": " + message);
+      }
     };
   });
   $.jqLog.classes.BrowserConsole.prototype.fatal = $.jqLog.classes.BrowserConsole.prototype.error; //browser console doesn't have fatal level
 
-})(jQuery);(function($) {
+})(jQuery);
+(function($) {
 
   $.jqLog.classes.ConsoleAppender = function() {
     this.initialize.apply(this, arguments);
