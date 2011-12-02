@@ -19,7 +19,6 @@ In order to build jqLog, you need to ruby 1.8.7, Node.js 0.2 or later, and git 1
 
 `rego-js-builder` gem installed:
 
-    rake
     gem install rego-js-builder
 
 
@@ -43,21 +42,21 @@ First, clone a copy of the main jqLog git repo by running `git clone git@github.
 Then, in the main directory of the distribution (the one that this file is in), type
 the following to build jqLog:
 
-  rake
+    rake
 
 You can also create each individually using these commands:
 
-	rake js		# Build non-minified jqLog source
-	rake min 		# Build minified JS and CSS
-	rake pack		# Build minified and packed jqLog JS (smallest filesize!)
+    rake js		# Build non-minified jqLog source
+    rake min 		# Build minified JS and CSS
+    rake pack		# Build minified and packed jqLog JS (smallest filesize!)
 
 To build and test the source code against JSLint type this:
 
-	rake hint
+    rake hint
 
 Finally, you can remove all the built files using the command:
 
-	rake clobber
+    rake clobber
 
 
 Building to a different directory
