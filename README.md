@@ -19,7 +19,9 @@ In order to build jqLog, you need to ruby 1.8.7, Node.js 0.2 or later, and git 1
 
 `rego-js-builder` gem installed:
 
+  rake
   gem install rego-js-builder
+
 
 Windows users:
 
