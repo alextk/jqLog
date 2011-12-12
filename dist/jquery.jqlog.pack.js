@@ -2,14 +2,14 @@
 * jqLog - jQuery logging for javascript
 *
 * Version: 0.0.2
-* Build: 80
+* Build: 82
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: 02 Dec 2011 22:20:12
+* Date: 12 Dec 2011 20:26:01
 */
 
 eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('(8(a){a.9={g:{}}})(u),8(a){a.9.s={1r:1,10:2,1g:3,1h:4,1i:5,1j:6,R:8(b,c){v(a.1k(c)==="1e")h b<c;h!1}}}(u),8(a){a.9.g.H=8(){7.l.x(7,t)},a.n(a.9.g.H.j,{l:8(b){a.n(7,b)},E:8(a,b,c){v(7.9.Q(7,a)){v(c)Z(k d 14 c)b=b.1l("{"+d+"}",c[d]);7.9.J(7,a,b)}}}),["S","L","I","K","F","M"].A(8(b){a.9.g.H.j[b]=8(){1m.j.1n.1o(t,a.9.s[b.12()]),7.E.x(7,t)}})}(u),8(a){a.9.g.Y=8(){7.l.x(7,t)},a.n(a.9.g.Y.j,{r:o,p:o,l:8(a){7.9=a,7.P()},P:8(){7.r={},7.p=7.r.q=y a.9.g.H({9:7.9,15:"",N:[],i:a.9.s.10})},B:8(a){a.O&&(7.p.i=a.O.i);Z(k b 14 a)v(b!="O"){k c=a[b],d=7.z(b);c.i&&(d.i=c.i)}},z:8(b){v(!b||b.16===0)h 7.p;k c=b.1p("."),d=7.r;c.A(8(a){d[a]||(d[a]={q:o}),d=d[a]}),d.q===o&&(d.q=y a.9.g.H({9:7.9,15:b,N:c}));h d.q},Q:8(b,c){v(a.9.s.R(c,7.p.i)||a.9.s.R(c,b.i))h!1;k d=7.r;Z(k e=0;e<b.N.16;e++){k f=b.N[e];v(d[f].q&&d[f].q.i&&a.9.s.R(c,d[f].q.i))h!1;d=d[f]}h!0}})}(u),8(a){a.9.g.T=8(){7.l.x(7,t)},a.n(a.9.g.T.j,{W:!0,l:8(){7.11=[]},E:8(a,b){7[a](b)}}),["S","L","I","K","F","M"].A(8(b){a.9.g.T.j[b]=8(a){7.11.19({1a:b,U:a})}})}(u),8(a){a.9.g.C=8(){7.l.x(7,t)},a.n(a.9.g.C.j,{l:8(){7.m=1b.m,7.W=1c 7.m!=="1d"&&7.m!==o},E:8(a,b){7[a](b)}}),["S","L","I","K","F"].A(8(b){a.9.g.C.j[b]=8(a){7.m[b]?7.m[b](a):7.m.E(b+": "+a)}}),a.9.g.C.j.M=a.9.g.C.j.F}(u),8(a){a.9.g.G=8(){7.l.x(7,t)};k b=a.9.s,c={};["S","L","I","K","F","M"].A(8(a){c[b[a.12()]]=a}),a.9.g.G.17=8(a){h c[a]},a.n(a.9.g.G.j,{m:o,l:8(b){a.n(7,b),7.m||(7.m=y a.9.g.C)},J:8(b){v(!7.m.W)h!1;k c=a.9.g.G.17(b.i);7.m[c](b.U);h!0}})}(u),8(a){a.9.g.V=8(){7.l.x(7,t)},a.n(a.9.g.V.j,{D:o,w:o,p:o,X:o,l:8(a){7.X=a,7.P()},P:8(){7.D=y a.9.g.Y(7),7.p=7.D.p,7.w=[],7.B(7.X)},Q:8(a,b){h 7.D.Q(a,b)},J:8(a,b,c){k d={1q:y 18,z:a,i:b,U:c};7.w.A(8(a){a.J(d)})},z:8(a){h 7.D.z(a)},B:8(a){a.r&&7.D.B(a.r),a.w&&(7.w=a.w)}}),a.n(a.9,{13:{w:[y a.9.g.G],r:{O:{i:a.9.s.10}}}});k b=8(){k b=y a.9.g.V(a.9.13);h{1f:b,p:8(){h b.p},z:8(a){h b.z(a)},B:8(a){b.B(a)}}}();a.n(a.9,b)}(u)',62,90,'|||||||this|function|jqLog|||||||classes|return|level|prototype|var|initialize|console|extend|null|rootLogger|_logger|loggers|Level|arguments|jQuery|if|appenders|apply|new|logger|each|configure|BrowserConsole|manager|log|error|ConsoleAppender|Logger|info|doAppend|warn|debug|fatal|nameArr|root|reset|isLevelEnabled|isLower|trace|ArrayConsole|message|JQLog|enabled|defaultConfig|LoggersManager|for|DEBUG|buffer|toUpperCase|defaults|in|name|length|loggingMethodForLevel|Date|push|method|window|typeof|undefined|number|_instance|INFO|WARN|ERROR|FATAL|type|replace|Array|unshift|call|split|date|TRACE'.split('|'),0,{}))
