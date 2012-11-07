@@ -14,7 +14,7 @@
       if(this.jqLog.isLevelEnabled(this, level)){
         if(params){
           for(var key in params){
-            message = message.replace("{"+key+"}", params[key]);
+            message = message.replace("%{"+key+"}", params[key]).replace("{"+key+"}", params[key]);
           }
         }
         this.jqLog.doAppend(this, level, message);

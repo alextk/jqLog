@@ -34,31 +34,6 @@ Windows users:
    To install phyton, simply download it from link on the guide, and add it to PATH variable.
 
 
-
-How to build jqLog
-------------------
-First, clone a copy of the main jqLog git repo by running `git clone git@github.com:alextk/jqLog.git`.
-
-Then, in the main directory of the distribution (the one that this file is in), type
-the following to build jqLog:
-
-    rake
-
-You can also create each individually using these commands:
-
-    rake js		# Build non-minified jqLog source
-    rake min 		# Build minified JS and CSS
-    rake pack		# Build minified and packed jqLog JS (smallest filesize!)
-
-To build and test the source code against JSLint type this:
-
-    rake hint
-
-Finally, you can remove all the built files using the command:
-
-    rake clobber
-
-
 Building to a different directory
 ---------------------------------
 If you want to build jqLog to a directory that is different from the default location, you need to edit the Rakefile.

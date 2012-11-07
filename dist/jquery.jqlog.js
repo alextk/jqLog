@@ -1,15 +1,15 @@
 /*
 * jqLog - jQuery logging for javascript
 *
-* Version: 0.0.2
-* Build: 82
+* Version: 0.0.3
+* Build: 86
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: 12 Dec 2011 20:26:01
+* Date: 07 Nov 2012 14:01:19
 */
 
 (function($) {
@@ -23,20 +23,52 @@
 (function($) {
 
   $.jqLog.Level = {
-    TRACE: 1,
-    DEBUG: 2,
-    INFO: 3,
-    WARN: 4,
-    ERROR: 5,
-    FATAL: 6,
+    TRACE: {num: 1, name: 'TRACE'},
+    DEBUG: {num: 2, name: 'DEBUG'},
+    INFO: {num: 3, name: 'INFO'},
+    WARN: {num: 4, name: 'WARN'},
+    ERROR: {num: 5, name: 'ERROR'},
+    FATAL: {num: 6, name: 'FATAL'},
 
     isLower: function(levelToCheck, levelThatRestricts){
-      if($.type(levelThatRestricts) === "number"){
-        return levelToCheck < levelThatRestricts;
+      if(levelThatRestricts && levelThatRestricts.num){
+        return levelToCheck.num < levelThatRestricts.num;
       }
       return false;
     }
+
   };
+
+})(jQuery);
+(function($) {
+
+  $.jqLog.classes.Layouter = function() {
+    this.initialize.apply(this, arguments);
+  };
+
+  $.extend($.jqLog.classes.Layouter.prototype, {
+
+    /*
+      Formats the logging message according to given pattern and date pattern. Pattern can include the following placeholders:
+      %{level} - log level
+      %{name} - log name
+      %{date} - log date (formatted according to date pattern)
+      %{msg} - the message that was logged
+
+      config.pattern - string of the pattern, like: "%{level} [%{name}] %{msg}"
+      config.datePattern - %{date} placeholder in the pattern will be replaced with date formatted by this pattern
+    */
+    initialize: function(config) {
+      this.datePattern = '%d-%m-%y %H:%M:%S';
+      this.pattern = '%{level} %{msg}';
+      $.extend(this, config);
+    },
+
+    eventToString: function(event){
+      return this.pattern.replace("%{level}", event.level.name).replace("%{name}", event.logger.name).replace("%{date}", event.date.strftime(this.datePattern)).replace("%{msg}", event.message);
+    }
+
+  });
 
 })(jQuery);
 (function($) {
@@ -55,7 +87,7 @@
       if(this.jqLog.isLevelEnabled(this, level)){
         if(params){
           for(var key in params){
-            message = message.replace("{"+key+"}", params[key]);
+            message = message.replace("%{"+key+"}", params[key]).replace("{"+key+"}", params[key]);
           }
         }
         this.jqLog.doAppend(this, level, message);
@@ -213,9 +245,9 @@
 
   var Level = $.jqLog.Level;
   var map = {};
-  ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].each(function(name){ map[Level[name.toUpperCase()]] = name; });
+  ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].each(function(name){ map[Level[name.toUpperCase()].name] = name; });
   $.jqLog.classes.ConsoleAppender.loggingMethodForLevel = function(level){
-    return map[level];
+    return map[level.name];
   };
 
   $.extend($.jqLog.classes.ConsoleAppender.prototype, {
@@ -227,11 +259,16 @@
       if(!this.console) this.console = new $.jqLog.classes.BrowserConsole();
     },
 
+    getLayouter: function(){
+      return this.layouter || $.jqLog.rootLayouter();
+    },
+
     doAppend: function(event){
       if(!this.console.enabled) return false;
 
       var loggingMethod = $.jqLog.classes.ConsoleAppender.loggingMethodForLevel(event.level);
-      this.console[loggingMethod](event.message); //perform actual log
+      var msg = this.getLayouter().eventToString(event);
+      this.console[loggingMethod](msg); //perform actual log
       return true;
     }
 
@@ -286,11 +323,15 @@
       if (options.appenders) {
         this.appenders = options.appenders;
       }
+      if (options.layouter) {
+        this.layouter = options.layouter;
+      }
     }
   });
 
   $.extend($.jqLog, {
     defaults: {
+      layouter: new $.jqLog.classes.Layouter(),
       appenders: [new $.jqLog.classes.ConsoleAppender()],
       loggers: {
         root: {level: $.jqLog.Level.DEBUG}
@@ -303,6 +344,10 @@
 
     return {
       _instance: instance,
+
+      rootLayouter: function(){
+        return instance.layouter;
+      },
 
       rootLogger: function() {
         return instance.rootLogger;

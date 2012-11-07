@@ -46,11 +46,15 @@
       if (options.appenders) {
         this.appenders = options.appenders;
       }
+      if (options.layouter) {
+        this.layouter = options.layouter;
+      }
     }
   });
 
   $.extend($.jqLog, {
     defaults: {
+      layouter: new $.jqLog.classes.Layouter(),
       appenders: [new $.jqLog.classes.ConsoleAppender()],
       loggers: {
         root: {level: $.jqLog.Level.DEBUG}
@@ -63,6 +67,10 @@
 
     return {
       _instance: instance,
+
+      rootLayouter: function(){
+        return instance.layouter;
+      },
 
       rootLogger: function() {
         return instance.rootLogger;

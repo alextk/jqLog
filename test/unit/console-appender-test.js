@@ -18,9 +18,9 @@ test("loggingMethodForLevel()", function() {
 test("enabled", function(){
   var appender = new $.jqLog.classes.ConsoleAppender();
   ok(appender.console instanceof $.jqLog.classes.BrowserConsole);
-  equals(appender.doAppend({level: $.jqLog.Level.DEBUG, message: 'debug message'}), true);
+  equals(appender.doAppend({level: $.jqLog.Level.DEBUG, message: 'debug message', date: new Date(), logger: $.jqLog.rootLogger()}), true);
   appender.console.enabled = false;
-  equals(appender.doAppend({level: $.jqLog.Level.DEBUG, message: 'debug message'}), false);
+  equals(appender.doAppend({level: $.jqLog.Level.DEBUG, message: 'debug message', date: new Date(), logger: $.jqLog.rootLogger()}), false);
 });
 
 test("doAppend()", function() {
@@ -31,11 +31,11 @@ test("doAppend()", function() {
   ok(appender.console instanceof $.jqLog.classes.ArrayConsole);
   equals(appender.console.enabled, true);
 
-  ok(appender.doAppend({level: Level.DEBUG, message: 'debug message1'}));
+  ok(appender.doAppend({level: $.jqLog.Level.DEBUG, message: 'debug message1', date: new Date(), logger: $.jqLog.rootLogger()}));
   equals(console.buffer.last().method, 'debug');
-  equals(console.buffer.last().message, 'debug message1');
+  equals(console.buffer.last().message, 'DEBUG debug message1');
 
-  ok(appender.doAppend({level: Level.INFO, message: 'info message1'}));
+  ok(appender.doAppend({level: $.jqLog.Level.INFO, message: 'info message1', date: new Date(), logger: $.jqLog.rootLogger()}));
   equals(console.buffer.last().method, 'info');
-  equals(console.buffer.last().message, 'info message1');
+  equals(console.buffer.last().message, 'INFO info message1');
 });

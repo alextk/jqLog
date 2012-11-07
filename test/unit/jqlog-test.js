@@ -96,36 +96,36 @@ test("log", function() {
   root.info('puki mon');
   equals(console.buffer.length, 1);
   equals(console.buffer.last().method, 'info');
-  equals(console.buffer.last().message, 'puki mon');
+  equals(console.buffer.last().message, 'INFO puki mon');
 
   l1.debug('l1 debug message');
   l1.info('l1 info message');
   equals(console.buffer.length, 1);
   equals(console.buffer.last().method, 'info');
-  equals(console.buffer.last().message, 'puki mon');
+  equals(console.buffer.last().message, 'INFO puki mon');
 
   l1.warn('l1 warn message');
   equals(console.buffer.length, 2);
   equals(console.buffer.last().method, 'warn');
-  equals(console.buffer.last().message, 'l1 warn message');
+  equals(console.buffer.last().message, 'WARN l1 warn message');
 
   l1.error('l1 error message');
   equals(console.buffer.length, 3);
   equals(console.buffer.last().method, 'error');
-  equals(console.buffer.last().message, 'l1 error message');
+  equals(console.buffer.last().message, 'ERROR l1 error message');
 
   l2.debug('l2 debug message');
   equals(console.buffer.length, 3);
   equals(console.buffer.last().method, 'error');
-  equals(console.buffer.last().message, 'l1 error message');
+  equals(console.buffer.last().message, 'ERROR l1 error message');
   
   l2.info('l2 info message');
   equals(console.buffer.length, 4);
   equals(console.buffer.last().method, 'info');
-  equals(console.buffer.last().message, 'l2 info message');
+  equals(console.buffer.last().message, 'INFO l2 info message');
 
   l2.warn('l2 warn message');
   equals(console.buffer.length, 5);
   equals(console.buffer.last().method, 'warn');
-  equals(console.buffer.last().message, 'l2 warn message');
+  equals(console.buffer.last().message, 'WARN l2 warn message');
 });

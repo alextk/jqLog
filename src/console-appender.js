@@ -6,9 +6,9 @@
 
   var Level = $.jqLog.Level;
   var map = {};
-  ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].each(function(name){ map[Level[name.toUpperCase()]] = name; });
+  ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].each(function(name){ map[Level[name.toUpperCase()].name] = name; });
   $.jqLog.classes.ConsoleAppender.loggingMethodForLevel = function(level){
-    return map[level];
+    return map[level.name];
   };
 
   $.extend($.jqLog.classes.ConsoleAppender.prototype, {
@@ -20,11 +20,16 @@
       if(!this.console) this.console = new $.jqLog.classes.BrowserConsole();
     },
 
+    getLayouter: function(){
+      return this.layouter || $.jqLog.rootLayouter();
+    },
+
     doAppend: function(event){
       if(!this.console.enabled) return false;
 
       var loggingMethod = $.jqLog.classes.ConsoleAppender.loggingMethodForLevel(event.level);
-      this.console[loggingMethod](event.message); //perform actual log
+      var msg = this.getLayouter().eventToString(event);
+      this.console[loggingMethod](msg); //perform actual log
       return true;
     }
 
