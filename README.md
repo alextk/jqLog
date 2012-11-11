@@ -36,16 +36,16 @@ Usage
 
 
 ###Create a logger###
-Use `$.jqLog.logger('my.LoggerName')` method, that will return instance of `$.jqLog.classes.Logger` class, and you can use its logging methods (info, trace, warn etc) to log messages.
-Examples: 
+Use `$.jqLog.logger('my.LoggerName')` method, that will return instance of `$.jqLog.classes.Logger` class, that you can use to log messages. For example:
+
     var logger1 = $.jqLog.logger('org.mycompany.myClass1');
     var logger2 = $.jqLog.logger('org.mycompany.myClass2');
 
 ###Logging messages###
-On logger instance you've created somewhere, invoke trace/debug/info/warn/error/fatal methods.
-Examples:
-    logger1.info('hello world'); //log message using INFO level
-    logger1.warn('some weird stuff is going on'); //log message using INFO level
+Once you have a logger instance invoke `trace/debug/info/warn/error/fatal` methods on it to log message with that level:
+
+    logger1.info('hello world'); //log message with INFO level
+    logger1.warn('some weird stuff is going on'); //log message with WARN level
 
 Example of using inside class:
 
