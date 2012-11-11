@@ -2,14 +2,14 @@
 * jqLog - jQuery logging for javascript
 *
 * Version: 0.0.3
-* Build: 86
+* Build: 88
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: 07 Nov 2012 14:01:19
+* Date: 11 Nov 2012 11:55:59
 */
 
 (function($) {
