@@ -31,6 +31,8 @@ Each logger can have a different level, so if you're intereseted in debugging me
 **Appender** - the channel to which messages are written. You can have multiple appenders active at the same time, for example writing
 to console, to server and to html div.
 
+**Layouter** - layouter is a class that is responsible for formatting the logging messages according to certain pattern. This gives you control
+on how the message will look like (will it include logging level, will it include date, logger name etc).
 
 Usage
 -------------------
@@ -70,6 +72,8 @@ Use `$.jqLog.configure` and pass it with configuration hash that can have the fo
       });
 
  * **loggers** - a hash of loggers configurations, when the key is the logger name, and the value is a hash of configuration for that logger. The logger configuration can have a **level** key that specifies a level for that logger.
+ * **appenders** - array of appenders, to which the logging messages will be written. The values should be instances of appender class.
+ * **layouter** - if you want to customize the message layout and date pattern you can pass layuter.
 
 ###Pattern of creating logger and using it inside a class###
 
