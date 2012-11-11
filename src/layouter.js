@@ -16,10 +16,15 @@
       config.pattern - string of the pattern, like: "%{level} [%{name}] %{msg}"
       config.datePattern - %{date} placeholder in the pattern will be replaced with date formatted by this pattern
     */
-    initialize: function(config) {
+    initialize: function(pattern, datePattern) {
       this.datePattern = '%d-%m-%y %H:%M:%S';
       this.pattern = '%{level} %{msg}';
-      $.extend(this, config);
+
+      if(arguments.length > 0) this.pattern = pattern;
+      if(arguments.length > 1) this.datePattern = datePattern;
+
+      if(typeof this.pattern != 'string') throw 'Layouter pattern parameter must be string';
+      if(typeof this.datePattern != 'string') throw 'Layouter datePattern parameter must be string';
     },
 
     eventToString: function(event){

@@ -2,14 +2,14 @@
 * jqLog - jQuery logging for javascript
 *
 * Version: 0.0.3
-* Build: 90
+* Build: 93
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: 11 Nov 2012 14:42:50
+* Date: 11 Nov 2012 14:58:20
 */
 
 (function($) {
@@ -65,10 +65,15 @@
       config.pattern - string of the pattern, like: "%{level} [%{name}] %{msg}"
       config.datePattern - %{date} placeholder in the pattern will be replaced with date formatted by this pattern
     */
-    initialize: function(config) {
+    initialize: function(pattern, datePattern) {
       this.datePattern = '%d-%m-%y %H:%M:%S';
       this.pattern = '%{level} %{msg}';
-      $.extend(this, config);
+
+      if(arguments.length > 0) this.pattern = pattern;
+      if(arguments.length > 1) this.datePattern = datePattern;
+
+      if(typeof this.pattern != 'string') throw 'Layouter pattern parameter must be string';
+      if(typeof this.datePattern != 'string') throw 'Layouter datePattern parameter must be string';
     },
 
     eventToString: function(event){
