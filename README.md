@@ -59,6 +59,18 @@ If you want to include parameters in the message string, you can use two syntaxe
     logger.debug('my debug message {0} and {1}', 'puki1', 'puki2'); //message will be: my debug message puki1 and puki2
     logger.debug('my debug message %{0} and %{1}', 'puki1', 'puki2'); //message will be: my debug message puki1 and puki2
 
+### Layouter ###
+You can configure custom layouter, that will format the messages beign logged, by the pattern you like. You pass a new instance
+of layouter to configuration: `new $.jqLog.classes.Layouter(pattern, datePattern)` and can customize the message pattern and date pattern:
+
+* **pattern** - pattern is a string with special placeholders that will be replaced for each message (like: "%{level} [%{name}] %{msg}").
+Placeholders can be:
+** %{level} - log level of the message (will be one of TRACE, DEBUG, etc)
+** %{name} - name of the logger trough which the message was logged
+** %{date} - the date message was logged (formatted according to date pattern)
+** %{msg} - the message that was logged
+* **datePattern** - %{date} placeholder in the pattern will be replaced with date formatted by this pattern (strftime format)
+
 ### Configuration ###
 Use `$.jqLog.configure` and pass it with configuration hash that can have the following keys:
 
