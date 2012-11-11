@@ -16,19 +16,40 @@ Include in &lt;head&gt; section of the page latest jqext and jqlog javascript fi
     <script src="/javascripts/vendor/jquery.jqlog.js" type="text/javascript"></script>
 
 
-Theory & Usage
+Theory
 -------------------
 Logging is about writing messages with certain level to various channels (console, remote server, file etc.).
 
-'Logger' - is instance of $.jqLog.classes.Logger class, and is the primary interface for writing logging messages.
+**Logger** - is instance of $.jqLog.classes.Logger class, and is the primary interface for writing logging messages.
 You should have more than one logger in you application, preferably one logger for each instance of class,
 so when you write a message using that logger, you know where it comes from.
 
-'Level' - message level: trace < debug < info < warn < error < fatal. The level are ordered, so if you've configured your logger to
+**Level** - message level: trace < debug < info < warn < error < fatal. The level are ordered, so if you've configured your logger to
 output message on warn level, then error and fatal will also be written, while info,debug and trace will be ignored.
 
-'Appender' - the channel to which messages are written. You can have multiple appenders active at the same time, for example writing
+**Appender** - the channel to which messages are written. You can have multiple appenders active at the same time, for example writing
 to console, to server and to html div.
+
+
+Usage
+-------------------
+
+**Create a logger** - use `$.jqLog.logger('my.LoggerName')` method, that will return instance of `$.jqLog.classes.Logger` class, and you can use its logging methods (info, trace, warn etc) to log messages.
+
+  var org.mycompany.myClass = function() {
+    this.initialize.apply(this, arguments);
+  };
+
+  $.extend(org.mycompany.myClass.prototype, {
+    initialize: function() {
+      this.logger = $.jqLog.logger('iPlan.controllers.client.TableArrangementController')
+    },
+
+    someMethod: function(method, message) {
+      this.logger.info('hello world'); //log message using INFO level
+      this.logger.warn('some weird stuff is going on'); //log message using INFO level
+    }
+  });
 
 
 Pre-compiled scripts
