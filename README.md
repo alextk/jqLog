@@ -36,20 +36,20 @@ Usage
 
 **Create a logger** - use `$.jqLog.logger('my.LoggerName')` method, that will return instance of `$.jqLog.classes.Logger` class, and you can use its logging methods (info, trace, warn etc) to log messages.
 
-  var org.mycompany.myClass = function() {
-    this.initialize.apply(this, arguments);
-  };
+    var org.mycompany.myClass = function() {
+      this.initialize.apply(this, arguments);
+    };
 
-  $.extend(org.mycompany.myClass.prototype, {
-    initialize: function() {
-      this.logger = $.jqLog.logger('iPlan.controllers.client.TableArrangementController')
-    },
+    $.extend(org.mycompany.myClass.prototype, {
+      initialize: function() {
+        this.logger = $.jqLog.logger('iPlan.controllers.client.TableArrangementController')
+      },
 
-    someMethod: function(method, message) {
-      this.logger.info('hello world'); //log message using INFO level
-      this.logger.warn('some weird stuff is going on'); //log message using INFO level
-    }
-  });
+      someMethod: function(method, message) {
+        this.logger.info('hello world'); //log message using INFO level
+        this.logger.warn('some weird stuff is going on'); //log message using INFO level
+      }
+    });
 
 
 Pre-compiled scripts
