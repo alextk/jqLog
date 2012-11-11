@@ -48,11 +48,12 @@ Once you have a logger instance invoke `trace/debug/info/warn/error/fatal` metho
     logger1.warn('some weird stuff is going on'); //log message with WARN level
 
 If you want to include parameters in the message string, you can use two syntaxes: object notation or array notation:
+   
     //object notation (use either %{} or {} for parameter names in message)
     logger.debug('my debug message {p1} and {p2}', {p1: 'puki1', p2: 'puki2'}); //message will be: my debug message puki1 and puki2
     logger.debug('my debug message %{p1} and %{p2}', {p1: 'puki1', p2: 'puki2'}); //message will be: my debug message puki1 and puki2
 
-    //array notation (use {0},{1},{2} or %{0},%{1},%{2} placeholders)
+    //array notation: use {0},{1},{2} or %{0},%{1},%{2} placeholders in message that will be replaced with arguments passed after the message:
     logger.debug('my debug message {0} and {1}', 'puki1', 'puki2'); //message will be: my debug message puki1 and puki2
     logger.debug('my debug message %{0} and %{1}', 'puki1', 'puki2'); //message will be: my debug message puki1 and puki2
 
