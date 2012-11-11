@@ -82,8 +82,8 @@ Placeholders can be:
 Use `$.jqLog.configure` and pass it with configuration hash that can have the following keys:
 
       $.jqLog.configure({
-        layouter: new $.jqLog.classes.Layouter('message pattern', 'date pattern'),
-        appenders: [appender1, appender2],
+        layouter: new $.jqLog.classes.Layouter('%{level} %{msg}', '%d-%m-%y %H:%M:%S'),
+        appenders: [new $.jqLog.classes.ConsoleAppender(), new $.jqLog.classes.AjaxAppender()],
         loggers: {
           root: {level: Level.WARN},
           'com.yoyo.Logger2': {level: Level.DEBUG}
