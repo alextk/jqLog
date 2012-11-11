@@ -2,14 +2,14 @@
 * jqLog - jQuery logging for javascript
 *
 * Version: 0.0.3
-* Build: 88
+* Build: 89
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: 11 Nov 2012 11:55:59
+* Date: 11 Nov 2012 14:09:11
 */
 
 (function($) {
@@ -30,12 +30,19 @@
     ERROR: {num: 5, name: 'ERROR'},
     FATAL: {num: 6, name: 'FATAL'},
 
+    // note that levelThatRestricts can be undefined, if it is undefined the it restricts
     isLower: function(levelToCheck, levelThatRestricts){
       if(levelThatRestricts && levelThatRestricts.num){
         return levelToCheck.num < levelThatRestricts.num;
       }
       return false;
+    },
+
+    // return true if given levelToCheck is restricted by given levelThatRestricts
+    isRestricted: function(levelToCheck, levelThatRestricts){
+      return levelToCheck.num < levelThatRestricts.num;
     }
+
 
   };
 
@@ -85,9 +92,13 @@
 
     log: function(level, message, params){
       if(this.jqLog.isLevelEnabled(this, level)){
-        if(params){
+        if(arguments.length == 3 && typeof params == 'object'){ //last parameter is parameters hash
           for(var key in params){
             message = message.replace("%{"+key+"}", params[key]).replace("{"+key+"}", params[key]);
+          }
+        } else if(arguments.length > 2){ //treat last arguments as array notation has, like: .info("my message {0}, {1} and {2}", 'p1', 'p2', 'p3')
+          for(var i=2; i<arguments.length; i++){
+            message = message.replace("%{"+(i-2)+"}", arguments[i]).replace("{"+(i-2)+"}", arguments[i]);
           }
         }
         this.jqLog.doAppend(this, level, message);
@@ -160,23 +171,27 @@
       return tree._logger;
     },
 
-    isLevelEnabled: function(logger, level) {
-      //if root level or logger level restricts - return false:
-      //if level is lower that root or level is lower than logger level ==> then the level is disabled (return false)
-      if ($.jqLog.Level.isLower(level, this.rootLogger.level) || $.jqLog.Level.isLower(level, logger.level)){
-        return false;
-      }
-
+    // return level for this logger that is inherited from its parents (all the way up to rootLogger)
+    inheritedLoggerLevel: function(logger){
+      if(logger == this.rootLogger) return this.rootLogger.level;
       //search parent loggers levels
       var tree = this.loggers;
       for (var i = 0; i < logger.nameArr.length; i++) {
         var key = logger.nameArr[i];
-        if (tree[key]._logger && tree[key]._logger.level && $.jqLog.Level.isLower(level, tree[key]._logger.level)) {
-          return false; //parent has logger and logger has level and logger's level is higher than checked level ==> return false
+        if (tree[key]._logger && tree[key]._logger.level) { //has parent, and parent logger level is set
+          return tree[key]._logger.level
         }
         tree = tree[key];
       }
-      return true;
+      return this.rootLogger.level;
+    },
+
+    //If logger has its own level set, limit by that level
+    //If logger has no level set, limit by parent level logger (or root logger if no parent has a specific level set)
+    isLevelEnabled: function(logger, level) {
+      if(logger.level) return !$.jqLog.Level.isRestricted(level, logger.level); //loger has its own level set
+
+      return !$.jqLog.Level.isRestricted(level, this.inheritedLoggerLevel(logger)); //logger has no own level set, restrict by its parents
     }
 
   });

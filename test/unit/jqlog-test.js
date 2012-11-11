@@ -79,10 +79,10 @@ test("log", function() {
   var appender = new $.jqLog.classes.ConsoleAppender({console: console});
 
   $.jqLog.configure({
+    layouter: new $.jqLog.classes.Layouter(),
     appenders: [appender],
     loggers: {
-      root: {level: Level.INFO},
-      'com.jqlog': {level: Level.WARN},
+      root: {level: Level.ERROR},
       'com.jqlog.Logger1': {level: Level.INFO},
       'com.yoyo.Logger2': {level: Level.DEBUG}
     }
@@ -92,40 +92,45 @@ test("log", function() {
   var l1 = $.jqLog.logger('com.jqlog.Logger1');
   var l2 = $.jqLog.logger('com.yoyo.Logger2');
 
-  root.debug('poki mon');
-  root.info('puki mon');
+  root.warn('poki mon'); //will not be written
+  root.error('puki mon'); //will be written
   equals(console.buffer.length, 1);
-  equals(console.buffer.last().method, 'info');
-  equals(console.buffer.last().message, 'INFO puki mon');
+  equals(console.buffer.last().method, 'error');
+  equals(console.buffer.last().message, 'ERROR puki mon');
 
-  l1.debug('l1 debug message');
-  l1.info('l1 info message');
-  equals(console.buffer.length, 1);
+  l1.debug('l1 debug message'); //will not be written
+  l1.info('l1 info message'); //will be written
+  equals(console.buffer.length, 2);
   equals(console.buffer.last().method, 'info');
-  equals(console.buffer.last().message, 'INFO puki mon');
+  equals(console.buffer.last().message, 'INFO l1 info message');
 
   l1.warn('l1 warn message');
-  equals(console.buffer.length, 2);
+  equals(console.buffer.length, 3);
   equals(console.buffer.last().method, 'warn');
   equals(console.buffer.last().message, 'WARN l1 warn message');
 
   l1.error('l1 error message');
-  equals(console.buffer.length, 3);
+  equals(console.buffer.length, 4);
+  equals(console.buffer.last().method, 'error');
+  equals(console.buffer.last().message, 'ERROR l1 error message');
+
+  l2.trace('l2 trace message');
+  equals(console.buffer.length, 4);
   equals(console.buffer.last().method, 'error');
   equals(console.buffer.last().message, 'ERROR l1 error message');
 
   l2.debug('l2 debug message');
-  equals(console.buffer.length, 3);
-  equals(console.buffer.last().method, 'error');
-  equals(console.buffer.last().message, 'ERROR l1 error message');
+  equals(console.buffer.length, 5);
+  equals(console.buffer.last().method, 'debug');
+  equals(console.buffer.last().message, 'DEBUG l2 debug message');
   
   l2.info('l2 info message');
-  equals(console.buffer.length, 4);
+  equals(console.buffer.length, 6);
   equals(console.buffer.last().method, 'info');
   equals(console.buffer.last().message, 'INFO l2 info message');
 
   l2.warn('l2 warn message');
-  equals(console.buffer.length, 5);
+  equals(console.buffer.length, 7);
   equals(console.buffer.last().method, 'warn');
   equals(console.buffer.last().message, 'WARN l2 warn message');
 });

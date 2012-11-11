@@ -54,23 +54,27 @@
       return tree._logger;
     },
 
-    isLevelEnabled: function(logger, level) {
-      //if root level or logger level restricts - return false:
-      //if level is lower that root or level is lower than logger level ==> then the level is disabled (return false)
-      if ($.jqLog.Level.isLower(level, this.rootLogger.level) || $.jqLog.Level.isLower(level, logger.level)){
-        return false;
-      }
-
+    // return level for this logger that is inherited from its parents (all the way up to rootLogger)
+    inheritedLoggerLevel: function(logger){
+      if(logger == this.rootLogger) return this.rootLogger.level;
       //search parent loggers levels
       var tree = this.loggers;
       for (var i = 0; i < logger.nameArr.length; i++) {
         var key = logger.nameArr[i];
-        if (tree[key]._logger && tree[key]._logger.level && $.jqLog.Level.isLower(level, tree[key]._logger.level)) {
-          return false; //parent has logger and logger has level and logger's level is higher than checked level ==> return false
+        if (tree[key]._logger && tree[key]._logger.level) { //has parent, and parent logger level is set
+          return tree[key]._logger.level
         }
         tree = tree[key];
       }
-      return true;
+      return this.rootLogger.level;
+    },
+
+    //If logger has its own level set, limit by that level
+    //If logger has no level set, limit by parent level logger (or root logger if no parent has a specific level set)
+    isLevelEnabled: function(logger, level) {
+      if(logger.level) return !$.jqLog.Level.isRestricted(level, logger.level); //loger has its own level set
+
+      return !$.jqLog.Level.isRestricted(level, this.inheritedLoggerLevel(logger)); //logger has no own level set, restrict by its parents
     }
 
   });
