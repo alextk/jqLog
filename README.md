@@ -10,7 +10,7 @@ Depends on latest version jqExt framework (Array enumerations and Date.strftime)
 
 Installation
 -------------------
-Include in <head> section of the page latest jqext and them jqlog javascript files:
+Include in &lt;head&gt; section of the page latest jqext and them jqlog javascript files:
 
     <script src="/javascripts/vendor/jquery.jqext.js" type="text/javascript"></script>
     <script src="/javascripts/vendor/jquery.jqlog.js" type="text/javascript"></script>
