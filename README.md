@@ -26,6 +26,7 @@ so when you write a message using that logger, you know where it comes from.
 
 **Level** - message level: trace < debug < info < warn < error < fatal. The level are ordered, so if you've configured your logger to
 output message on warn level, then error and fatal will also be written, while info,debug and trace will be ignored.
+Each logger can have a different level, so if you're intereseted in debugging messages from some specific logger, you can configure it easily.
 
 **Appender** - the channel to which messages are written. You can have multiple appenders active at the same time, for example writing
 to console, to server and to html div.
@@ -68,6 +69,7 @@ Use `$.jqLog.configure` and pass it with configuration hash that can have the fo
         }
       });
 
+ * **loggers** - a hash of loggers configurations, when the key is the logger name, and the value is a hash of configuration for that logger. The logger configuration can have a **level** key that specifies a level for that logger.
 
 ###Pattern of creating logger and using it inside a class###
 
