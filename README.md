@@ -65,10 +65,10 @@ of layouter to configuration: `new $.jqLog.classes.Layouter(pattern, datePattern
 
 * **pattern** - pattern is a string with special placeholders that will be replaced for each message (like: "%{level} [%{name}] %{msg}").
 Placeholders can be:
-** %{level} - log level of the message (will be one of TRACE, DEBUG, etc)
-** %{name} - name of the logger trough which the message was logged
-** %{date} - the date message was logged (formatted according to date pattern)
-** %{msg} - the message that was logged
+    * %{level} - log level of the message (will be one of TRACE, DEBUG, etc)
+    * %{name} - name of the logger trough which the message was logged
+    * %{date} - the date message was logged (formatted according to date pattern)
+    * %{msg} - the message that was logged
 * **datePattern** - %{date} placeholder in the pattern will be replaced with date formatted by this pattern (strftime format)
 
 ### Configuration ###
