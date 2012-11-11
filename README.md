@@ -28,6 +28,13 @@ so when you write a message using that logger, you know where it comes from.
 output message on warn level, then error and fatal will also be written, while info,debug and trace will be ignored.
 Each logger can have a different level, so if you're intereseted in debugging messages from some specific logger, you can configure it easily.
 
+**Root logger** - the top most logger. Loggers are hierachial by their name with root logger at the top. 
+The name hierarchy is determined by dot characters, so for example logger with name 'com.yoyo.MyClass' is child of 'com.yoyo' who is a child of 'com' who is a child of root logger.
+The hierarchy is automatically handled when you create the logger by parsing it's name. 
+**Logger inhertis its log level from its parent, unless it has a log level set specifically.** Root logger always has a level.
+So for example, if your root logger level is INFO and you set for 'com.yoyo.MyClass' level to DEBUG then all messages 
+coming from that logger at debug level or higher will be written to appenders and DEBUG messages from other loggers will not be written.
+
 **Appender** - the channel to which messages are written. You can have multiple appenders active at the same time, for example writing
 to console, to server and to html div.
 
