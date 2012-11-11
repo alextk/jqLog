@@ -10,16 +10,25 @@ Depends on latest version jqExt framework (Array enumerations and Date.strftime)
 
 Installation
 -------------------
-Include in &lt;head&gt; section of the page latest jqext and them jqlog javascript files:
+Include in &lt;head&gt; section of the page latest jqext and jqlog javascript files:
 
     <script src="/javascripts/vendor/jquery.jqext.js" type="text/javascript"></script>
     <script src="/javascripts/vendor/jquery.jqlog.js" type="text/javascript"></script>
 
 
-Usage
+Theory & Usage
 -------------------
+Logging is about writing messages with certain level to various channels (console, remote server, file etc.).
 
+'Logger' - is instance of $.jqLog.classes.Logger class, and is the primary interface for writing logging messages.
+You should have more than one logger in you application, preferably one logger for each instance of class,
+so when you write a message using that logger, you know where it comes from.
 
+'Level' - message level: trace < debug < info < warn < error < fatal. The level are ordered, so if you've configured your logger to
+output message on warn level, then error and fatal will also be written, while info,debug and trace will be ignored.
+
+'Appender' - the channel to which messages are written. You can have multiple appenders active at the same time, for example writing
+to console, to server and to html div.
 
 
 Pre-compiled scripts
