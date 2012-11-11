@@ -34,7 +34,20 @@ to console, to server and to html div.
 Usage
 -------------------
 
-**Create a logger** - use `$.jqLog.logger('my.LoggerName')` method, that will return instance of `$.jqLog.classes.Logger` class, and you can use its logging methods (info, trace, warn etc) to log messages.
+
+###Create a logger###
+Use `$.jqLog.logger('my.LoggerName')` method, that will return instance of `$.jqLog.classes.Logger` class, and you can use its logging methods (info, trace, warn etc) to log messages.
+Examples: 
+    var logger1 = $.jqLog.logger('org.mycompany.myClass1');
+    var logger2 = $.jqLog.logger('org.mycompany.myClass2');
+
+###Logging messages###
+On logger instance you've created somewhere, invoke trace/debug/info/warn/error/fatal methods.
+Examples:
+    logger1.info('hello world'); //log message using INFO level
+    logger1.warn('some weird stuff is going on'); //log message using INFO level
+
+Example of using inside class:
 
     var org.mycompany.myClass = function() {
       this.initialize.apply(this, arguments);
@@ -42,7 +55,7 @@ Usage
 
     $.extend(org.mycompany.myClass.prototype, {
       initialize: function() {
-        this.logger = $.jqLog.logger('iPlan.controllers.client.TableArrangementController')
+        this.logger = $.jqLog.logger('org.mycompany.myClass'); //create logger
       },
 
       someMethod: function(method, message) {
