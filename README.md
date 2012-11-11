@@ -34,14 +34,13 @@ to console, to server and to html div.
 Usage
 -------------------
 
-
-###Create a logger###
+### Creating a logger ###
 Use `$.jqLog.logger('my.LoggerName')` method, that will return instance of `$.jqLog.classes.Logger` class, that you can use to log messages. For example:
 
     var logger1 = $.jqLog.logger('org.mycompany.myClass1');
     var logger2 = $.jqLog.logger('org.mycompany.myClass2');
 
-###Logging messages###
+### Logging messages ###
 Once you have a logger instance invoke `trace/debug/info/warn/error/fatal` methods on it to log message with that level:
 
     logger1.info('hello world'); //log message with INFO level
@@ -57,8 +56,20 @@ If you want to include parameters in the message string, you can use two syntaxe
     logger.debug('my debug message {0} and {1}', 'puki1', 'puki2'); //message will be: my debug message puki1 and puki2
     logger.debug('my debug message %{0} and %{1}', 'puki1', 'puki2'); //message will be: my debug message puki1 and puki2
 
+### Configuration ###
+Use `$.jqLog.configure` and pass it with configuration hash that can have the following keys:
 
-###Pattern of using inside class###
+      $.jqLog.configure({
+        layouter: new $.jqLog.classes.Layouter('message pattern', 'date pattern'),
+        appenders: [appender1, appender2],
+        loggers: {
+          root: {level: Level.WARN},
+          'com.yoyo.Logger2': {level: Level.DEBUG}
+        }
+      });
+
+
+###Pattern of creating logger and using it inside a class###
 
     var org.mycompany.myClass = function() {
       this.initialize.apply(this, arguments);
