@@ -15,6 +15,7 @@
       $.extend(this, config);
 
       this.buffer = [];
+      this.bufferLocked = false;
     },
 
     getLayouter: function(){

@@ -2,14 +2,14 @@
 * jqLog - jQuery logging for javascript
 *
 * Version: 0.0.3
-* Build: 93
+* Build: 94
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: 11 Nov 2012 14:58:20
+* Date: 17 Apr 2013 00:44:56
 */
 
 (function($) {
@@ -77,7 +77,7 @@
     },
 
     eventToString: function(event){
-      return this.pattern.replace("%{level}", event.level.name).replace("%{name}", event.logger.name).replace("%{date}", event.date.strftime(this.datePattern)).replace("%{msg}", event.message);
+      return this.pattern.replace("%{level}", event.level.name.padLeft(5, ' ')).replace("%{name}", event.logger.name).replace("%{date}", event.date.strftime(this.datePattern)).replace("%{msg}", event.message);
     }
 
   });
@@ -312,6 +312,7 @@
       $.extend(this, config);
 
       this.buffer = [];
+      this.bufferLocked = false;
     },
 
     getLayouter: function(){
