@@ -2,14 +2,14 @@
 * jqLog - jQuery logging for javascript
 *
 * Version: 0.0.3
-* Build: 95
+* Build: 96
 * Copyright 2011 Alex Tkachev
 *
 * Dual licensed under MIT or GPLv2 licenses
 *   http://en.wikipedia.org/wiki/MIT_License
 *   http://en.wikipedia.org/wiki/GNU_General_Public_License
 *
-* Date: 17 Apr 2013 21:42:06
+* Date: 22 May 2013 23:23:41
 */
 
 (function($) {
@@ -260,6 +260,7 @@
 (function($) {
 
   $.jqLog.classes.ConsoleAppender = function() {
+    this.__class_name__ = '$.jqLog.classes.ConsoleAppender';
     this.initialize.apply(this, arguments);
   };
 
@@ -298,6 +299,7 @@
 (function($) {
 
   $.jqLog.classes.AjaxAppender = function() {
+    this.__class_name__ = '$.jqLog.classes.AjaxAppender';
     this.initialize.apply(this, arguments);
   };
 

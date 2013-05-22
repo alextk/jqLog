@@ -1,6 +1,7 @@
 (function($) {
 
   $.jqLog.classes.ConsoleAppender = function() {
+    this.__class_name__ = '$.jqLog.classes.ConsoleAppender';
     this.initialize.apply(this, arguments);
   };
 

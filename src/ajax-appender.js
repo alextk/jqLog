@@ -1,6 +1,7 @@
 (function($) {
 
   $.jqLog.classes.AjaxAppender = function() {
+    this.__class_name__ = '$.jqLog.classes.AjaxAppender';
     this.initialize.apply(this, arguments);
   };
 
