@@ -28,7 +28,7 @@
     },
 
     eventToString: function(event){
-      return this.pattern.replace("%{level}", event.level.name.padLeft(5, ' ')).replace("%{name}", event.logger.name).replace("%{date}", event.date.strftime(this.datePattern)).replace("%{msg}", event.message);
+      return this.pattern.replace("%{level}", event.level.name.lpad(5, ' ')).replace("%{name}", event.logger.name).replace("%{date}", event.date.strftime(this.datePattern)).replace("%{msg}", event.message);
     }
 
   });

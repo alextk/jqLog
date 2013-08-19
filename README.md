@@ -5,7 +5,7 @@ Log4J style logging for javasript using jQuery.
 
 Dependecies
 -------------------
-Depends on latest version jqExt framework (Array enumerations and Date.strftime)
+Depends on latest version jqExt framework (Array enumerations, Date.strftime, String padding)
 
 
 Installation
